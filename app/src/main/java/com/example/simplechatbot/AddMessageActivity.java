@@ -14,9 +14,9 @@ import androidx.appcompat.app.AppCompatActivity;
 public class AddMessageActivity extends AppCompatActivity {
 
     public static final String EXTRA_TEXT =
-            "com.example.chatbot.EXTRA_TEXT";
+            "com.example.simplechatbot.EXTRA_TEXT";
     public static final String EXTRA_ANSWER =
-            "com.example.chatbot.EXTRA_ANSWER";
+            "com.example.simplechatbot.EXTRA_ANSWER";
 
     private EditText editTextText;
     private EditText editTextAnswer;
