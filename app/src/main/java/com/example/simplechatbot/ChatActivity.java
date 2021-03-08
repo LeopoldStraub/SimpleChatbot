@@ -12,6 +12,8 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,12 +24,15 @@ public class ChatActivity extends AppCompatActivity {
     private EditText editTextChat;
     private Button buttonSend;
     private RecyclerView recyclerView;
-    private ArrayList<String> chats = new ArrayList<>();
+    private ArrayList<ChatMessage> chats = new ArrayList<>();
+    private ChatViewModel chatViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+
+        chatViewModel = new ViewModelProvider(this).get(ChatViewModel.class);
 
         editTextChat = findViewById(R.id.edit_text_chat);
         buttonSend = findViewById(R.id.button_send);
@@ -47,9 +52,25 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(!editTextChat.getText().toString().trim().isEmpty()){
-                    chats.add(editTextChat.getText().toString());
+                    chats.add(new ChatMessage(editTextChat.getText().toString(), ChatMessage.MessageType.RECEIVED));
                     adapter.setMessages(chats);
                     adapter.notifyDataSetChanged();
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            buttonSend.setClickable(false);
+
+
+                            chats.add(new ChatMessage(chatViewModel.answer(chats.get(chats.size()-1).getChatMessage()), ChatMessage.MessageType.SENT));
+                            adapter.setMessages(chats);
+                            adapter.notifyDataSetChanged();
+
+                            buttonSend.setClickable(true);
+                        }
+                    });
+
+
                 }
             }
         });
