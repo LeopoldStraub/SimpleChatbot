@@ -54,7 +54,8 @@ public class ChatActivity extends AppCompatActivity {
                 if(!editTextChat.getText().toString().trim().isEmpty()){
                     chats.add(new ChatMessage(editTextChat.getText().toString(), ChatMessage.MessageType.RECEIVED));
                     adapter.setMessages(chats);
-                    adapter.notifyDataSetChanged();
+
+                    adapter.notifyDataSetChanged();      //Better use DiffUtil
 
                     runOnUiThread(new Runnable() {
                         @Override

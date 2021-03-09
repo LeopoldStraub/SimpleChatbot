@@ -16,7 +16,7 @@ public class ChatViewModel extends AndroidViewModel {
 
     public ChatViewModel(@NonNull Application application) {
         super(application);
-        this.repository = new MessageRepository(application);
+        this.repository = RepositoryFactory.getInstanceMessageRepository(application);
         this.allMessages = repository.getAllMessages();
     }
 
@@ -26,12 +26,8 @@ public class ChatViewModel extends AndroidViewModel {
 
 
     public String answer(String message){
-        List<Message> m = allMessages.getValue();
-        for (Message s: m) {
-            if (s.getText().equals(message)){
-                return s.getAnswer();
-            }
-        }
-        return "Neue Nachricht";
+
+       return repository.answer(message);
+
     }
 }

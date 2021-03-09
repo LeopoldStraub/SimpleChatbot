@@ -29,4 +29,6 @@ public interface MessageDao {
     @Delete
     void delete(Message message);
 
+    @Query("SELECT answer FROM messages_table WHERE id = (SELECT id FROM messages_table WHERE text = :message )")
+    String answer(String message);
 }

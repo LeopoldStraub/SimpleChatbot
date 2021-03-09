@@ -15,7 +15,7 @@ public class MessageViewModel extends AndroidViewModel {
 
     public MessageViewModel(@NonNull Application application) {
         super(application);
-        this.repository = new MessageRepository(application);
+        this.repository = RepositoryFactory.getInstanceMessageRepository(application);
         this.allMessages = repository.getAllMessages();
     }
 
