@@ -67,7 +67,7 @@ public class ChatActivity extends AppCompatActivity {
 
                             buttonSend.setClickable(true);
 
-
+                    recyclerView.smoothScrollToPosition(chats.size());
 
                 }
             }
