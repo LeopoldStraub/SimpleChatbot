@@ -8,6 +8,8 @@ import androidx.lifecycle.LiveData;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 public class ChatViewModel extends AndroidViewModel {
 
@@ -25,9 +27,10 @@ public class ChatViewModel extends AndroidViewModel {
     }
 
 
-    public String answer(String message){
+    public String answer(String message) {
 
-       return repository.answer(message);
+        return repository.answer(message);
+
 
     }
 }

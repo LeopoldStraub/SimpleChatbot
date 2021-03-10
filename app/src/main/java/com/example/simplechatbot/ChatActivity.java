@@ -57,9 +57,7 @@ public class ChatActivity extends AppCompatActivity {
 
                     adapter.notifyDataSetChanged();      //Better use DiffUtil
 
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
+
                             buttonSend.setClickable(false);
 
 
@@ -68,8 +66,7 @@ public class ChatActivity extends AppCompatActivity {
                             adapter.notifyDataSetChanged();
 
                             buttonSend.setClickable(true);
-                        }
-                    });
+
 
 
                 }

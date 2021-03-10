@@ -5,6 +5,9 @@ import android.app.Application;
 import androidx.lifecycle.LiveData;
 
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
@@ -12,7 +15,7 @@ public class MessageRepository {
 
     private MessageDao mMessageDao;
     private LiveData<List<Message>> mAllMessages;
-    String currentAnswer;
+    String currentAnswer = "BLABLA";
 
 
 
@@ -54,9 +57,25 @@ public class MessageRepository {
         }
 
     public String answer(String message) {
-        MessageDatabase.databaseWriteExecutor.execute(() -> {
-            currentAnswer = mMessageDao.answer(message);
-        });
-        return currentAnswer;
+
+        String ret = "Error";
+
+            Future<?> fut =  MessageDatabase.databaseWriteExecutor.submit(new Callable<String>() {
+                @Override
+                public String call() {
+                  return mMessageDao.answer(message);
+
+                }
+            });
+
+        try {
+            ret = (String) fut.get();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return ret;
     }
+
+
 }
