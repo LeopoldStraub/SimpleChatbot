@@ -58,16 +58,22 @@ public class ChatActivity extends AppCompatActivity {
                     adapter.notifyDataSetChanged();      //Better use DiffUtil
 
 
-                            buttonSend.setClickable(false);
+                  runOnUiThread(new Runnable() {
+                      @Override
+                      public void run() {
+                          buttonSend.setClickable(false);
 
 
-                            chats.add(new ChatMessage(chatViewModel.answer(chats.get(chats.size()-1).getChatMessage()), ChatMessage.MessageType.SENT));
-                            adapter.setMessages(chats);
-                            adapter.notifyDataSetChanged();
+                          chats.add(new ChatMessage(chatViewModel.answer(chats.get(chats.size()-1).getChatMessage()), ChatMessage.MessageType.SENT));
+                          adapter.setMessages(chats);
+                          adapter.notifyDataSetChanged();
 
-                            buttonSend.setClickable(true);
+                          buttonSend.setClickable(true);
 
-                    recyclerView.smoothScrollToPosition(chats.size());
+                          recyclerView.smoothScrollToPosition(chats.size());
+                      }
+                  });
+
 
                 }
             }

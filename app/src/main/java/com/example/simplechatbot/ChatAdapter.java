@@ -4,6 +4,10 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.ScaleAnimation;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,11 +15,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
 
     private List<ChatMessage> chats = new ArrayList<>();
     private LayoutInflater layoutInflater;
+    private final static int FADE_DURATION = 1000; //FADE_DURATION in milliseconds
+
 
     ChatAdapter(Context context, ArrayList<ChatMessage>data){
         this.layoutInflater = LayoutInflater.from(context);
@@ -52,13 +59,37 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  
             case 1:
                 ChatHolder1 chatHolder1 = (ChatHolder1) holder;
                 chatHolder1.textViewChatRight.setText(currentMessage.getChatMessage());
+                setAnimation(holder.itemView, position);
                 break;
 
             case 0:
                 ChatHolder2 chatHolder2 = (ChatHolder2) holder;
                 chatHolder2.textViewChatLeft.setText(currentMessage.getChatMessage());
+                setAnimation(holder.itemView, position);
                 break;
         }
+
+
+    }
+    protected int mLastPosition = -1;
+    protected void setAnimation(View viewToAnimate, int position) {
+        if (position > mLastPosition) {
+            ScaleAnimation anim = new ScaleAnimation(0.0f, 1.0f, 0.0f, 1.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+            anim.setDuration(2000);
+            viewToAnimate.startAnimation(anim);
+            mLastPosition = position;
+        }
+    }
+
+    private void setFadeAnimation(View view) {
+        AlphaAnimation anim = new AlphaAnimation(0.0f, 1.0f);
+        anim.setDuration(FADE_DURATION);
+        view.startAnimation(anim);
+    }
+    private void setScaleAnimation(View view) {
+        ScaleAnimation anim = new ScaleAnimation(0.0f, 1.0f, 0.0f, 1.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        anim.setDuration(FADE_DURATION);
+        view.startAnimation(anim);
     }
 
     @Override

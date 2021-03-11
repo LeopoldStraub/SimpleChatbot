@@ -16,7 +16,9 @@
         tools:listitem="@layout/chat_item"
         android:layout_above="@id/linear_layout_chat"
         app:reverseLayout="true"
-        app:stackFromEnd="true">
+        app:stackFromEnd="true"
+        android:background="@null"
+       >
     </androidx.recyclerview.widget.RecyclerView>
 
     <LinearLayout
