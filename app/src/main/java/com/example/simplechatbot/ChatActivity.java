@@ -1,6 +1,7 @@
 package com.example.simplechatbot;
 
 import android.content.Intent;
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -50,6 +51,7 @@ public class ChatActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(true);
 
+
        ChatAdapter adapter = new ChatAdapter(this,chats);
         recyclerView.setAdapter(adapter);
 
@@ -85,6 +87,7 @@ public class ChatActivity extends AppCompatActivity {
                                      @Override
                                      public void run() {
                                          adapter.notifyDataSetChanged();
+                                         recyclerView.smoothScrollToPosition(chats.size());
                                      }
                                  });
 
