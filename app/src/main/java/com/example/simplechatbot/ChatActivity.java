@@ -8,23 +8,28 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.FutureTask;
 
 public class ChatActivity extends AppCompatActivity {
 
     private EditText editTextChat;
     private Button buttonSend;
     private RecyclerView recyclerView;
-    private ArrayList<ChatMessage> chats = new ArrayList<>();
+    private List<ChatMessage> chats = new ArrayList<>();
     private ChatViewModel chatViewModel;
 
     @Override
@@ -45,34 +50,46 @@ public class ChatActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(true);
 
-       ChatAdapter adapter = new ChatAdapter(this, chats);
+       ChatAdapter adapter = new ChatAdapter(this,chats);
         recyclerView.setAdapter(adapter);
 
         buttonSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(!editTextChat.getText().toString().trim().isEmpty()){
-                    chats.add(new ChatMessage(editTextChat.getText().toString(), ChatMessage.MessageType.RECEIVED));
-                    adapter.setMessages(chats);
+                    chats.add(new ChatMessage(editTextChat.getText().toString(), ChatMessage.MessageType.SENT));
 
-                    adapter.notifyDataSetChanged();      //Better use DiffUtil
-
-
-                  runOnUiThread(new Runnable() {
-                      @Override
-                      public void run() {
-                          buttonSend.setClickable(false);
+                            adapter.notifyDataSetChanged();      //Better use DiffUtil
+                    recyclerView.smoothScrollToPosition(chats.size());
 
 
-                          chats.add(new ChatMessage(chatViewModel.answer(chats.get(chats.size()-1).getChatMessage()), ChatMessage.MessageType.SENT));
-                          adapter.setMessages(chats);
-                          adapter.notifyDataSetChanged();
 
-                          buttonSend.setClickable(true);
+                       Executors.newSingleThreadExecutor().execute(new Runnable() {
+                             @Override
+                             public void run() {
+                                 try {
+                                     Thread.sleep(1000);
+                                 } catch (InterruptedException e) {
+                                     e.printStackTrace();
+                                 }
+                                 Future<String> mess = chatViewModel.answer(chats.get(chats.size()-1).getChatMessage());
+                                 String message = "BALAAA";
+                                 try {
+                                     message = mess.get();
+                                 } catch (ExecutionException | InterruptedException e) {
+                                     e.printStackTrace();
+                                 }
 
-                          recyclerView.smoothScrollToPosition(chats.size());
-                      }
-                  });
+                                 chats.add(new ChatMessage(message, ChatMessage.MessageType.RECEIVED));
+                                 runOnUiThread(new Runnable() {
+                                     @Override
+                                     public void run() {
+                                         adapter.notifyDataSetChanged();
+                                     }
+                                 });
+
+                             }
+                         });
 
 
                 }

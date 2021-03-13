@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.concurrent.Future;
 
 public class ChatViewModel extends AndroidViewModel {
 
-    private MessageRepository repository;
+    public MessageRepository repository;
     private LiveData<List<Message>> allMessages;
 
     public ChatViewModel(@NonNull Application application) {
@@ -27,10 +28,11 @@ public class ChatViewModel extends AndroidViewModel {
     }
 
 
-    public String answer(String message) {
+    public Future<String> answer(String message) {
 
         return repository.answer(message);
 
 
     }
+
 }

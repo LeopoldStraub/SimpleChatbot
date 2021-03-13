@@ -24,7 +24,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  
     private final static int FADE_DURATION = 1000; //FADE_DURATION in milliseconds
 
 
-    ChatAdapter(Context context, ArrayList<ChatMessage>data){
+    ChatAdapter(Context context, List<ChatMessage>data){
         this.layoutInflater = LayoutInflater.from(context);
         chats = data;
     }
@@ -59,13 +59,13 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  
             case 1:
                 ChatHolder1 chatHolder1 = (ChatHolder1) holder;
                 chatHolder1.textViewChatRight.setText(currentMessage.getChatMessage());
-                setAnimation(holder.itemView, position);
+             //   setAnimation(holder.itemView, position);
                 break;
 
             case 0:
                 ChatHolder2 chatHolder2 = (ChatHolder2) holder;
                 chatHolder2.textViewChatLeft.setText(currentMessage.getChatMessage());
-                setAnimation(holder.itemView, position);
+            //    setAnimation(holder.itemView, position);
                 break;
         }
 

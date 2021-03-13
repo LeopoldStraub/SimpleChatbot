@@ -56,11 +56,10 @@ public class MessageRepository {
             });
         }
 
-    public String answer(String message) {
+    public Future<String> answer(String message) {
 
-        String ret = "Error";
 
-            Future<?> fut =  MessageDatabase.databaseWriteExecutor.submit(new Callable<String>() {
+            return MessageDatabase.databaseWriteExecutor.submit(new Callable<String>() {
                 @Override
                 public String call() {
                   return mMessageDao.answer(message);
@@ -68,13 +67,6 @@ public class MessageRepository {
                 }
             });
 
-        try {
-            ret = (String) fut.get();
-        } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        return ret;
     }
 
 
