@@ -36,12 +36,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Your Message" />
+            android:hint="Your Message"
+            android:background="@drawable/chat_edit_text_shape"
+            android:padding="6dp"/>
 
         <Button
             android:id="@+id/button_send"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
             android:background="@drawable/ic_send" />
 
     </LinearLayout>

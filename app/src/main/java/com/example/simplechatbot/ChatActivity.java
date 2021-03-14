@@ -16,6 +16,12 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.simplechatbot.ChatAdapter;
+import com.example.simplechatbot.ChatMessage;
+import com.example.simplechatbot.ChatViewModel;
+import com.example.simplechatbot.MainActivity;
+import com.example.simplechatbot.R;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -42,7 +48,6 @@ public class ChatActivity extends AppCompatActivity {
 
         editTextChat = findViewById(R.id.edit_text_chat);
         buttonSend = findViewById(R.id.button_send);
-
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_list);
         setTitle("Chatbot");
 

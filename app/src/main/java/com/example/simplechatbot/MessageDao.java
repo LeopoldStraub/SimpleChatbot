@@ -29,6 +29,6 @@ public interface MessageDao {
     @Delete
     void delete(Message message);
 
-    @Query("SELECT answer FROM messages_table WHERE text = :message LIMIT 1")
+    @Query("SELECT answer FROM messages_table WHERE UPPER(text) = UPPER(:message) LIMIT 1")
     String answer(String message);
 }

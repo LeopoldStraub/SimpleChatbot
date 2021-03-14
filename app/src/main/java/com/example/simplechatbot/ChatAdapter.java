@@ -21,7 +21,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  
 
     private List<ChatMessage> chats = new ArrayList<>();
     private LayoutInflater layoutInflater;
-    private final static int FADE_DURATION = 1000; //FADE_DURATION in milliseconds
+    private final static int SCALE_DURATION = 600; //SCALE_DURATION in milliseconds
 
 
     ChatAdapter(Context context, List<ChatMessage>data){
@@ -59,13 +59,13 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  
             case 1:
                 ChatHolder1 chatHolder1 = (ChatHolder1) holder;
                 chatHolder1.textViewChatRight.setText(currentMessage.getChatMessage());
-             //   setAnimation(holder.itemView, position);
+                setAnimation(holder.itemView, position);
                 break;
 
             case 0:
                 ChatHolder2 chatHolder2 = (ChatHolder2) holder;
                 chatHolder2.textViewChatLeft.setText(currentMessage.getChatMessage());
-            //    setAnimation(holder.itemView, position);
+                setAnimation(holder.itemView, position);
                 break;
         }
 
@@ -75,22 +75,12 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  
     protected void setAnimation(View viewToAnimate, int position) {
         if (position > mLastPosition) {
             ScaleAnimation anim = new ScaleAnimation(0.0f, 1.0f, 0.0f, 1.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-            anim.setDuration(2000);
+            anim.setDuration(SCALE_DURATION);
             viewToAnimate.startAnimation(anim);
             mLastPosition = position;
         }
     }
 
-    private void setFadeAnimation(View view) {
-        AlphaAnimation anim = new AlphaAnimation(0.0f, 1.0f);
-        anim.setDuration(FADE_DURATION);
-        view.startAnimation(anim);
-    }
-    private void setScaleAnimation(View view) {
-        ScaleAnimation anim = new ScaleAnimation(0.0f, 1.0f, 0.0f, 1.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-        anim.setDuration(FADE_DURATION);
-        view.startAnimation(anim);
-    }
 
     @Override
     public int getItemCount() {
