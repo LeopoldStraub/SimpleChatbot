@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -86,7 +87,7 @@ public class ChatActivity extends AppCompatActivity {
                                  } catch (ExecutionException | InterruptedException e) {
                                      e.printStackTrace();
                                  }
-
+                                if (message == null) message = "Ich verstehe das nicht";
                                  chats.add(new ChatMessage(message, ChatMessage.MessageType.RECEIVED));
                                  runOnUiThread(new Runnable() {
                                      @Override
@@ -94,7 +95,18 @@ public class ChatActivity extends AppCompatActivity {
                                          adapter.notifyDataSetChanged();
                                          recyclerView.smoothScrollToPosition(chats.size());
                                      }
+
                                  });
+                                    //lernen
+                                 if (chats.size() > 2){
+                                     String text1, answer1 = "";
+                                     text1 = chats.get(chats.size()-3).getChatMessage();
+                                     answer1 = chats.get(chats.size()-2).getChatMessage();
+                                        chatViewModel.learn(text1,answer1);
+
+
+
+                                 }
 
                              }
                          });

@@ -70,4 +70,10 @@ public class MessageRepository {
     }
 
 
+    public void learn(String text1, String answer1) {
+        MessageDatabase.databaseWriteExecutor.execute(() -> {
+            Message m = new Message(text1, answer1,"01.01.2000");
+            mMessageDao.learn(m);
+        });
+    }
 }

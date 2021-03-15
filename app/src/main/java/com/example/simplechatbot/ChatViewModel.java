@@ -35,4 +35,8 @@ public class ChatViewModel extends AndroidViewModel {
 
     }
 
+    public void learn(String text1, String answer1){
+        repository.learn(text1, answer1);
+    }
+
 }

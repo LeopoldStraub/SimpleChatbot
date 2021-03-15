@@ -31,4 +31,7 @@ public interface MessageDao {
 
     @Query("SELECT answer FROM messages_table WHERE UPPER(text) = UPPER(:message) LIMIT 1")
     String answer(String message);
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    void learn(Message message);
 }
