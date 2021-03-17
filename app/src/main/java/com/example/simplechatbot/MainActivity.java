@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
                             String title = intent.getStringExtra(AddMessageActivity.EXTRA_TEXT);
                             String description = intent.getStringExtra(AddMessageActivity.EXTRA_ANSWER);
 
-                           Message message = new Message(title,description,"01.01.2021"); // set Date
+                           Message message = new Message(title,description,1);
                             messageViewModel.insert(message);
                             Toast.makeText(MainActivity.this, "Message saved", Toast.LENGTH_SHORT).show();
                             break;

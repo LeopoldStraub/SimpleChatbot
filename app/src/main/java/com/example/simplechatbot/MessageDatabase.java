@@ -12,7 +12,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = Message.class, version = 3, exportSchema = false)
+@Database(entities = Message.class, version = 4, exportSchema = false)
 public abstract class MessageDatabase extends RoomDatabase {
 
     public abstract MessageDao messageDao();
@@ -47,9 +47,9 @@ public abstract class MessageDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            messageDao.insert(new Message("Hallo", "Hallo!", "01.01.2021"));
-            messageDao.insert(new Message("Leck mich", "Du mich auch", "02.01.2021"));
-            messageDao.insert(new Message("Wie gehts", "Gut, dir?", "02.01.2021"));
+            messageDao.insert(new Message("Hallo", "Hallo!", 1));
+            messageDao.insert(new Message("Leck mich", "Du mich auch", 1));
+            messageDao.insert(new Message("Wie gehts", "Gut, dir?", 1));
             return null;
         }
     }

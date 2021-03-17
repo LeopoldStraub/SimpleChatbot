@@ -12,12 +12,12 @@ public class Message {
 
     private String text;
     private String answer;
-    private String dateSent;
+    private int priority;
 
-    public Message(String text, String answer, String dateSent){
+    public Message(String text, String answer, int priority){
         this.text = text;
         this.answer = answer;
-        this.dateSent = dateSent;
+        this.priority = priority;
     }
 
     public int getId() {
@@ -27,8 +27,8 @@ public class Message {
         return text;
     }
 
-    public String getDateSent() {
-        return dateSent;
+    public int getPriority() {
+        return priority;
     }
 
     public String getAnswer() {
@@ -47,7 +47,7 @@ public class Message {
         this.answer = answer;
     }
 
-    public void setDateSent(String dateSent) {
-        this.dateSent = dateSent;
+    public void setPriority(int priority) {
+        this.priority = priority;
     }
 }
