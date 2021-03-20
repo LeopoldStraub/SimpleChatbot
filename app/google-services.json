@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "208217430345",
+    "project_id": "simplechatbot-4fbeb",
+    "storage_bucket": "simplechatbot-4fbeb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:208217430345:android:32814f37f2a9ae24b7e298",
+        "android_client_info": {
+          "package_name": "com.example.simplechatbot"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "208217430345-kcl9s0jdpt1lpak5r0q1h5mlue98c5hj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARen6sJI88cONk_9m1KrVmJYYJLnF0BLU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "208217430345-kcl9s0jdpt1lpak5r0q1h5mlue98c5hj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
