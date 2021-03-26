@@ -1,6 +1,6 @@
 # SimpleChatbot
 Chatbot, der aus deinen Antworten lernt
 
-##Info
+# Info
 - Room Persistence Library
 - MVVM
